@@ -6,22 +6,26 @@ import { Row, Col } from 'react-flexbox-grid';
 
 class TripListOptions extends React.Component {
   handleTags(tag, checked) {
+    console.log(checked);
     if (checked) {
       console.log('Adding tag', tag);
       // TODO - use action dispatcher from props
       this.props.filters.tags.push(tag);
+      this.props.changeTags(this.props.filters.tags);
     } else {
       console.log('Removing tag', tag);
       // TODO - use action dispatcher from props
-      const index = this.props.filters.tags.indexOf(tag);
-      this.props.filters.tags.splice(index, 1);
+      const filteredTags = this.props.filters.tags.filter(element => element !== tag);
+      // console.log('helooo', filteredTags);
+      this.props.changeTags(filteredTags);
     }
   }
 
   handleDuration(type, value) {
-    console.log('Changing duration', type, value);
+    // console.log('Changing duration', type, value);
     // TODO - use action dispatcher from props
-    this.props.filters(value);
+    this.props.filters.duration[type] = parseInt(value);
+    this.props.changeDuration(this.props.filters.duration);
   }
 
   handleSearch(phrase) {
@@ -59,7 +63,10 @@ class TripListOptions extends React.Component {
                 <div className={styles.dropdown}>
                   {Object.keys(tags).map(tag => (
                     <label key={tag} className={styles.option}>
-                      <input type='checkbox' checked={filters.tags.indexOf(tag) > -1} onChange={event => this.handleTags(tag, event.currentTarget.checked)} />
+                      {
+                        console.log(tag, filters.tags)
+                      }
+                      <input type='checkbox' checked={filters.tags.includes(tag)} onChange={event => this.handleTags(tag, event.currentTarget.checked)} />
                       {tag}
                     </label>
                   ))}
