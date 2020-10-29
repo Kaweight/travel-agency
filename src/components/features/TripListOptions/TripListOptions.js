@@ -16,7 +16,6 @@ class TripListOptions extends React.Component {
       console.log('Removing tag', tag);
       // TODO - use action dispatcher from props
       const filteredTags = this.props.filters.tags.filter(element => element !== tag);
-      // console.log('helooo', filteredTags);
       this.props.changeTags(filteredTags);
     }
   }
@@ -64,9 +63,9 @@ class TripListOptions extends React.Component {
                   {Object.keys(tags).map(tag => (
                     <label key={tag} className={styles.option}>
                       {
-                        console.log(tag, filters.tags)
+                        // console.log(tag, filters.tags)
                       }
-                      <input type='checkbox' checked={filters.tags.includes(tag)} onChange={event => this.handleTags(tag, event.currentTarget.checked)} />
+                      <input type='checkbox' checked={filters.filteredTags && filters.filteredTags.includes(tag)} onChange={event => this.handleTags(tag, event.currentTarget.checked)} />
                       {tag}
                     </label>
                   ))}
