@@ -20,6 +20,7 @@ const optionTypes = {
 
 const OrderOption = ({ name, type, id, setOrderOption, ...otherProps }) => {
   const OptionComponent = optionTypes[type];
+  // console.log('bleble', setOrderOption);
   if (!OptionComponent) {
     return null;
   } else {
